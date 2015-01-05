@@ -1,4 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
@@ -16,10 +18,10 @@
 
         <p>
             Login:
-            <h:inputText value="#{indexMB.login}"></h:inputText>
+            <h:inputText value="#{indexPageMB.login}"></h:inputText>
             Password:
-            <h:inputSecret value="#{indexMB.password}"></h:inputSecret>
-            <h:commandButton value="enter" action="#{indexMB.myAction}"></h:commandButton><br/>
+            <h:inputSecret value="#{indexPageMB.password}"></h:inputSecret>
+            <h:commandButton value="enter" action="#{indexPageMB.myAction}"></h:commandButton><br/>
 
             <p><h:commandButton value="admin page" action="adminPage"></h:commandButton>
                 <h:commandButton value="user page" action="userPage"></h:commandButton></p>

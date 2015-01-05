@@ -2,7 +2,6 @@ package com.epic.app.controllers;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-
 import com.epic.app.model.Item;
 import com.epic.app.service.ItemService;
 import org.springframework.context.annotation.Scope;
@@ -21,7 +20,7 @@ import java.io.Serializable;
 @Scope("session")
 public class ItemMB implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 3L;
     private static final String SUCCESS = "success";
     private static final String ERROR   = "error";
 
@@ -36,14 +35,12 @@ public class ItemMB implements Serializable {
     }
 
     public String addItem() {
-        System.out.println(getContent());
 
         try {
             Item item = new Item();
 
-            item.setNumber(getNumber());
-            item.setContent(getContent());
-            //item.setContent("тесповый");
+            item.setNumber(getNumber().trim());
+            item.setContent(getContent().trim());
             getItemService().addItem(item);
             return SUCCESS;
         } catch (DataAccessException e) {

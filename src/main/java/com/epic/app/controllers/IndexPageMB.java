@@ -10,7 +10,7 @@ import java.io.Serializable;
  */
 @Named
 @Scope("request")
-public class IndexMB implements Serializable {
+public class IndexPageMB implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private static final String SUCCESS = "success";
@@ -36,12 +36,6 @@ public class IndexMB implements Serializable {
 
 
     public String myAction()  {
-
-      /*  Item item = new Item();
-
-        item.setNumber("125");
-        item.setContent("test conyetn 123");
-        itemService.addItem(item);*/
 
     //TODO
         //разобраться с логином/паролем.

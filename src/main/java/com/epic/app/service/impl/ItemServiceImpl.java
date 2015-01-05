@@ -3,6 +3,7 @@ package com.epic.app.service.impl;
 import com.epic.app.dao.ItemDao;
 import com.epic.app.model.Item;
 import com.epic.app.service.ItemService;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,6 +27,9 @@ public class ItemServiceImpl implements ItemService {
     @Transactional(readOnly = false)
     @Override
     public void addItem(Item item) {
+
+        if (item == null) throw new DataAccessException("item must not be null"){};
+
         itemDao.addItem(item);
     }
 }
