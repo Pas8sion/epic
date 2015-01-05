@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Admin</title>
+</h:head>
+<h:body>
+
+    <h:form>
+
+        <h1>Admin page</h1>
+        <p>Добавить вопрос:</p>
+
+        <p>
+            Number:
+            <h:inputText value="#{itemMB.number}"></h:inputText><br/>
+            Content:
+            <h:inputTextarea rows="5" cols="40" value="#{itemMB.content}"></h:inputTextarea><br/>
+            <h:commandButton value="reset" action="#{itemMB.reset()}"></h:commandButton>
+            <h:commandButton value="save" action="#{itemMB.addItem()}"></h:commandButton>
+
+        </p>
+    </h:form>
+
+</h:body>
+</html> 

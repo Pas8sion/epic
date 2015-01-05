@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Авторизация</title>
+</h:head>
+<h:body>
+
+
+    <h:form>
+
+        <p>Wellcome</p>
+
+        <p>
+            Login:
+            <h:inputText value="#{indexMB.login}"></h:inputText>
+            Password:
+            <h:inputSecret value="#{indexMB.password}"></h:inputSecret>
+            <h:commandButton value="enter" action="#{indexMB.myAction}"></h:commandButton><br/>
+
+            <p><h:commandButton value="admin page" action="adminPage"></h:commandButton>
+                <h:commandButton value="user page" action="userPage"></h:commandButton></p>
+        </p>
+    </h:form>
+
+</h:body>
+</html> 
