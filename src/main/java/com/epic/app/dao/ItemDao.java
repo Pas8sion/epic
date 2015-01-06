@@ -13,5 +13,6 @@ public interface ItemDao extends BasicCrudDao<Item>{
     public List<Item> getAllItems();
 
     public void addItem(Item item);
+    public void removeItem(Item item);
 
 }

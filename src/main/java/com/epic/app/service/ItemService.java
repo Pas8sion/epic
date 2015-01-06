@@ -11,4 +11,7 @@ public interface ItemService {
     public List<Item> getAllItems();
 
     public void addItem(Item item);
+
+    public Item getItemByNumber(String number);
+    public void removeItem(Item item);
 }

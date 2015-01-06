@@ -29,4 +29,9 @@ public class ItemDaoImpl extends AbstractHibernateDAO<Item> implements ItemDao{
     public void addItem(Item item) {
         save(item);
     }
+
+    @Override
+    public void removeItem(Item item) {
+        remove(item.getId());
+    }
 }

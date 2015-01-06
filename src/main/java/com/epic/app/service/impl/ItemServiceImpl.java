@@ -32,4 +32,15 @@ public class ItemServiceImpl implements ItemService {
 
         itemDao.addItem(item);
     }
+
+    @Override
+    public Item getItemByNumber(String number) {
+        return itemDao.getItemByNumber(number);
+    }
+
+    @Transactional(readOnly = false)
+    @Override
+    public void removeItem(Item item) {
+        itemDao.removeItem(item);
+    }
 }

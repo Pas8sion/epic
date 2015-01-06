@@ -150,14 +150,20 @@
         <artifactId>javax.inject</artifactId>
         <version>1</version>
     </dependency>
+    <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>javax.servlet-api</artifactId>
+        <version>3.1.0</version>
+        <scope>test</scope>
+    </dependency>
 
-  <!--      &lt;!&ndash; c3p0 dependency &ndash;&gt;
-        <dependency>
-            <groupId>c3p0</groupId>
-            <artifactId>c3p0</artifactId>
-            <version>0.9.1.2</version>
-        </dependency>
+    <!--      &lt;!&ndash; c3p0 dependency &ndash;&gt;
+          <dependency>
+              <groupId>c3p0</groupId>
+              <artifactId>c3p0</artifactId>
+              <version>0.9.1.2</version>
+          </dependency>
 
--->
+  -->
 </dependencies>
 </project>
