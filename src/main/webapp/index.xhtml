@@ -16,16 +16,28 @@
 
         <p>Wellcome</p>
 
-        <p>
-            Login:
-            <h:inputText value="#{indexPageMB.login}"></h:inputText>
-            Password:
-            <h:inputSecret value="#{indexPageMB.password}"></h:inputSecret>
-            <h:commandButton value="enter" action="#{indexPageMB.myAction}"></h:commandButton><br/>
+        <h:panelGrid columns="3" cellpadding="2">
+            <p:outputLabel for="login" value="Login: "/>
+            <p:inputText id="login" value="#{indexPageMB.login}" required="false">
+               <!-- <f:converter converterId="javax.faces.Integer"/>-->
+                <!--<f:validateLength minimum="5"/>-->
+            </p:inputText>
+            <p:message for="login" display="text"/>
+            <p:outputLabel for="password" value="Password: "/>
+            <p:password id="password" value="#{indexPageMB.password}" feedback="true" inline="false" required="false">
+                <!--<f:validateLength minimum="5"/>-->
+            </p:password>
 
-            <p><h:commandButton value="admin page" action="adminPage"></h:commandButton>
-                <h:commandButton value="user page" action="userPage"></h:commandButton></p>
-        </p>
+            <p:message for="password" display="text"/>
+            <h:commandButton value="enter" action="#{indexPageMB.myAction}"></h:commandButton>
+        </h:panelGrid>
+
+        <p:spacer height="10"/>
+        <p:separator/>
+
+        <p><h:commandButton value="admin page" action="adminPage"></h:commandButton>
+            <h:commandButton value="user page" action="userPage"></h:commandButton></p>
+
     </h:form>
 
 </h:body>

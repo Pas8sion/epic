@@ -12,19 +12,23 @@
 <h:body>
 
     <h:form>
+        <p:growl id="growl" life="8000" />
 
         <h1>Admin page</h1>
         <p>Добавить вопрос:</p>
 
+        <h:panelGrid columns="2" cellpadding="2">
         <p>
             Number:
-            <h:inputText value="#{itemMB.number}"></h:inputText><br/>
+            <p:inputText value="#{questionMB.number}"/><br/>
             Content:
-            <h:inputTextarea rows="5" cols="40" value="#{itemMB.content}"></h:inputTextarea><br/>
-            <h:commandButton value="reset" action="#{itemMB.reset()}"></h:commandButton>
-            <h:commandButton value="save" action="#{itemMB.addItem()}"></h:commandButton>
+            <p:inputTextarea rows="5" cols="40" value="#{questionMB.content}"/>
+            <p:commandButton value="reset" action="#{questionMB.reset()}" />
+            <p:commandButton value="save" action="#{questionMB.addItem()}" update="growl" />
 
         </p>
+        </h:panelGrid>
+
     </h:form>
 
 </h:body>

@@ -1,6 +1,9 @@
 package com.epic.app.model;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 /**
  * Created by Pas8sion on 02.01.2015.
@@ -8,19 +11,22 @@ import javax.persistence.*;
 
 @Entity
 //@Table
-public class Item {
+public class Question {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @NotEmpty
     @Column(unique = true)
     private String number;
+
+    @NotNull
     @Column(columnDefinition = "TEXT")
     private String content;
 
-    public Item() {
+    public Question() {
     }
-    public Item(String number, String content) {
+    public Question(String number, String content) {
         this.number = number;
         this.content = content;
     }
@@ -47,5 +53,10 @@ public class Item {
 
     public void setNumber(String number) {
         this.number = number;
+    }
+
+    @Override
+    public String toString() {
+        return number +". "+ content;
     }
 }
