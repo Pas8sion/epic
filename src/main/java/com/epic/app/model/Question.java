@@ -4,6 +4,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by Pas8sion on 02.01.2015.
@@ -11,11 +13,12 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 //@Table
-public class Question {
+public class Question implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @Column(name = "question_id")
+    private Integer id;
     @NotEmpty
     @Column(unique = true)
     private String number;
@@ -23,6 +26,17 @@ public class Question {
     @NotNull
     @Column(columnDefinition = "TEXT")
     private String content;
+
+    //@NotNull
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "questionOwner")
+    private List<Answer> answers;
+
+    /**
+     * if openQuestion==false then question has many variants of answers(a,b,c.... ), else only one (text the expected response)
+     */
+    @NotNull
+    @Column
+    private Boolean openQuestion;
 
     public Question() {
     }
@@ -58,5 +72,21 @@ public class Question {
     @Override
     public String toString() {
         return number +". "+ content;
+    }
+
+    public List<Answer> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(List<Answer> answers) {
+        this.answers = answers;
+    }
+
+    public Boolean getOpenQuestion() {
+        return openQuestion;
+    }
+
+    public void setOpenQuestion(Boolean openQuestion) {
+        this.openQuestion = openQuestion;
     }
 }

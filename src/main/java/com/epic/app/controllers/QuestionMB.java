@@ -1,6 +1,8 @@
 package com.epic.app.controllers;
 
+import com.epic.app.model.Answer;
 import com.epic.app.model.Question;
+import com.epic.app.service.AnswerService;
 import com.epic.app.service.QuestionService;
 import org.springframework.context.annotation.Scope;
 import org.springframework.dao.DataAccessException;
@@ -11,6 +13,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -35,10 +38,19 @@ public class QuestionMB implements Serializable {
     @Inject
     private QuestionService questionService;
 
+    @Inject
+    private AnswerService answerService;
+
     private String number;
     private String content;
 
     private List<Question> questionsList;
+    private Boolean openQuestion;
+
+    private List<Answer> answersList = new ArrayList<Answer>();
+    private String answerNumber;
+    private String answerContent;
+    private Boolean answerCorrect;
 
     @PostConstruct
     public void init() {
@@ -47,6 +59,7 @@ public class QuestionMB implements Serializable {
 
         questionsIterator = questionsList.listIterator();
         getNextQuestion();
+
     }
 
 
@@ -55,13 +68,19 @@ public class QuestionMB implements Serializable {
         return questionService;
     }
 
-    public void addItem() {
+    public void addQuestion() {
 
         try {
             Question question = new Question();
 
             question.setNumber(getNumber().trim());
             question.setContent(getContent().trim());
+            question.setOpenQuestion(getOpenQuestion());
+
+            for (Answer answer : answersList) {
+                answer.setQuestionOwner(question);
+            }
+            question.setAnswers(answersList);
             getQuestionService().addQuestion(question);
             //return SUCCESS;
             addMessage("Question added", FacesMessage.SEVERITY_INFO);
@@ -82,6 +101,7 @@ public class QuestionMB implements Serializable {
     public void reset() {
         this.setNumber("");
         this.setContent("");
+        this.setOpenQuestion(false);
     }
 
 
@@ -144,4 +164,62 @@ public class QuestionMB implements Serializable {
     public void setCurrentQuestion(Question currentQuestion) {
         this.currentQuestion = currentQuestion;
     }
+
+    public Boolean getOpenQuestion() {
+        return openQuestion;
+    }
+
+    public void setOpenQuestion(Boolean openQuestion) {
+        this.openQuestion = openQuestion;
+    }
+
+    public List<Answer> getAnswersList() {
+        return answersList;
+    }
+
+    public void setAnswersList(List<Answer> answersList) {
+        this.answersList = answersList;
+    }
+
+    public String deleteRowAnswer(Answer answer) {
+
+        answersList.remove(answer);
+        return null;
+    }
+
+    public Boolean getAnswerCorrect() {
+        return answerCorrect;
+    }
+
+    public void setAnswerCorrect(Boolean answerCorrect) {
+        this.answerCorrect = answerCorrect;
+    }
+
+    public String getAnswerContent() {
+        return answerContent;
+    }
+
+    public void setAnswerContent(String answerContent) {
+        this.answerContent = answerContent;
+    }
+
+    public String getAnswerNumber() {
+        return answerNumber;
+    }
+
+    public void setAnswerNumber(String answerNumber) {
+        this.answerNumber = answerNumber;
+    }
+
+    public String addAnswer() {
+
+        Answer answer = new Answer();
+        answer.setNumber(this.getAnswerNumber());
+        answer.setContent(this.getAnswerContent());
+        answer.setCorrectAnswer(this.getAnswerCorrect());
+
+        answersList.add(answer);
+        return null;
+    }
+
 }

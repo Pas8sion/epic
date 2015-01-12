@@ -167,6 +167,13 @@
         <version>4.2.0.Final</version>
     </dependency>
 
+    <dependency>
+        <groupId>org.unitils</groupId>
+        <artifactId>unitils-core</artifactId>
+        <version>3.4.2</version>
+        <scope>test</scope>
+    </dependency>
+
     <!--      &lt;!&ndash; c3p0 dependency &ndash;&gt;
           <dependency>
               <groupId>c3p0</groupId>
