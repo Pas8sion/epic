@@ -12,6 +12,7 @@
         </el-resolver>
     </application>
 
+
     <!-- configuration of navigation rules -->
     <navigation-rule>
         <from-view-id>/index.xhtml</from-view-id>

@@ -28,6 +28,7 @@ public class QuestionServiceIntegrationTest extends IntegrationTest{
         Question question = new Question();
         question.setNumber("12345");
         question.setContent("12345 тестовый вопрос");
+        question.setOpenQuestion(false);
 
         Answer a = new Answer();
         a.setNumber("111");

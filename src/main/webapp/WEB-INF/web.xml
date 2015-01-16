@@ -62,6 +62,7 @@
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
 
+
     <!--CharacterEncodingFilter start-->
     <filter>
         <filter-name>CharacterEncodingFilter</filter-name>

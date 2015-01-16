@@ -28,7 +28,6 @@ public class QuestionServiceImpl implements QuestionService {
     public void addQuestion(Question question) {
 
         if (question == null) throw new IllegalArgumentException("Question cannot be null");
-
         questionDao.addQuestion(question);
     }
 

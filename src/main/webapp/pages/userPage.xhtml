@@ -22,17 +22,30 @@
 
             <h:panelGrid columns="1" cellpadding="2">
                 <p>
-
-                    <p:outputLabel id="question" value="#{questionMB.currentQuestion}" style="font-weight: bold"/>
-
+                    <p:outputLabel id="question" value="#{questionUserMB.currentEntry.getKey()}" style="font-weight: bold"/>
                     <!--<p:inputTextarea rows="5" cols="40" value=""/>-->
-
-
                 </p>
             </h:panelGrid>
 
-            <p:commandButton value="previous" action="#{questionMB.getPreviousQuestion}" update="question" icon="fa fa-backward" type="button"/>
-            <p:commandButton value="next" action="#{questionMB.getNextQuestion}" update="question" icon="fa fa-forward" type="button"/>
+            <p:dataTable id="answersTable" var="answer" value="#{questionUserMB.currentEntry.getValue()}">
+                <p:column headerText="">
+                    <p:selectBooleanCheckbox value="#{answer.userAnswerYesNo}">
+                        <!--<p:ajax update="msg" listener="{selectBooleanView.addMessage}" />-->
+                    </p:selectBooleanCheckbox>
+                </p:column>
+
+
+                <p:column headerText="Варіанти відповіді:">
+                    <h:outputText value="#{answer}" />
+                </p:column>
+
+            </p:dataTable>
+
+            <p:commandButton value="previous" action="#{questionUserMB.getPreviousQuestion()}" update="question answersTable" />
+            <p:commandButton value="next" action="#{questionUserMB.getNextQuestion()}" update="question answersTable" />
+
+           <!-- <p:commandButton value="previous" action="{questionMB.getPreviousQuestion}" update="question" icon="fa fa-backward" type="button"/>
+            <p:commandButton value="next" action="{questionMB.getNextQuestion}" update="question" icon="fa fa-forward" type="button"/>-->
 
         </p:panel>
 
