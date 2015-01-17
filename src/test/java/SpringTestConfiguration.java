@@ -3,8 +3,6 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.mock.web.MockServletContext;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import javax.servlet.ServletContext;
-
 @Configuration
 @EnableTransactionManagement
 @ComponentScan(basePackages = "com.epic.app")
@@ -24,7 +22,7 @@ public class SpringTestConfiguration {
     }
 
     @Bean
-    public ServletContext servletContext() {
+    public MockServletContext servletContext() {
         return new MockServletContext();
     }
 }

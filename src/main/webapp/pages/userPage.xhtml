@@ -3,6 +3,7 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html">
 
 <h:head>
@@ -27,25 +28,40 @@
                 </p>
             </h:panelGrid>
 
-            <p:dataTable id="answersTable" var="answer" value="#{questionUserMB.currentEntry.getValue()}">
+            <p:dataTable id="answersTable" var="answer" value="#{questionUserMB.currentEntry.getValue()}" rowIndexVar="rowIndex">
                 <p:column headerText="">
                     <p:selectBooleanCheckbox value="#{answer.userAnswerYesNo}">
                         <!--<p:ajax update="msg" listener="{selectBooleanView.addMessage}" />-->
                     </p:selectBooleanCheckbox>
                 </p:column>
 
-
                 <p:column headerText="Варіанти відповіді:">
-                    <h:outputText value="#{answer}" />
+                    <h:outputText value="#{rowIndex+1}. #{answer}" />
                 </p:column>
 
             </p:dataTable>
 
-            <p:commandButton value="previous" action="#{questionUserMB.getPreviousQuestion()}" update="question answersTable" />
-            <p:commandButton value="next" action="#{questionUserMB.getNextQuestion()}" update="question answersTable" />
 
-           <!-- <p:commandButton value="previous" action="{questionMB.getPreviousQuestion}" update="question" icon="fa fa-backward" type="button"/>
-            <p:commandButton value="next" action="{questionMB.getNextQuestion}" update="question" icon="fa fa-forward" type="button"/>-->
+            <p:toolbar>
+                <f:facet name="left">
+                    <p:commandButton value="Назад" action="#{questionUserMB.getPreviousQuestion()}"
+                                     update="question answersTable"/>
+                    <p:commandButton value="Вперед" action="#{questionUserMB.getNextQuestion()}"
+                                     update="question answersTable"/>
+            <span class="ui-separator">
+                <span class="ui-icon ui-icon-grip-dotted-vertical"/>
+            </span>
+                </f:facet>
+
+                <f:facet name="right">
+                    <p:commandButton value="Завершити тестування" action="#{questionUserMB.saveResult()}"
+                                     update="question answersTable growl"/>
+                </f:facet>
+            </p:toolbar>
+
+
+            <!-- <p:commandButton value="previous" action="{questionMB.getPreviousQuestion}" update="question" icon="fa fa-backward" type="button"/>
+             <p:commandButton value="next" action="{questionMB.getNextQuestion}" update="question" icon="fa fa-forward" type="button"/>-->
 
         </p:panel>
 

@@ -3,7 +3,6 @@ package com.epic.app.dao.impl;
 import com.epic.app.dao.BasicCrudDao;
 import org.hibernate.*;
 import org.hibernate.cfg.ImprovedNamingStrategy;
-import org.hibernate.metadata.ClassMetadata;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +10,10 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
 
-import static org.apache.commons.beanutils.PropertyUtils.getProperty;
-import static org.apache.commons.beanutils.PropertyUtils.setProperty;
 import static org.hibernate.criterion.Restrictions.eq;
 import static org.springframework.util.Assert.notNull;
 

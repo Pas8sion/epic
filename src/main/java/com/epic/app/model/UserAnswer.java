@@ -18,7 +18,7 @@ public class UserAnswer implements Serializable {
     @Column
     private Date testingDate;
 
-    @NotNull
+    //@NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
@@ -102,6 +102,7 @@ public class UserAnswer implements Serializable {
 
     @Override
     public String toString() {
-        return answer.getNumber() +". "+ answer.getContent();
+        return answer.getContent();
     }
+
 }

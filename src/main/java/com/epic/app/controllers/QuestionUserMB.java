@@ -5,9 +5,13 @@ import com.epic.app.model.Question;
 import com.epic.app.model.User;
 import com.epic.app.model.UserAnswer;
 import com.epic.app.service.QuestionService;
+import com.epic.app.service.UserAnswerService;
+import com.epic.app.service.UserService;
 import org.springframework.context.annotation.Scope;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
@@ -25,17 +29,19 @@ public class QuestionUserMB implements Serializable {
     private static final long serialVersionUID = 34L;
     private static final String SUCCESS = "success";
     private static final String ERROR   = "error";
-    //TODO replace by correct user
-    private static final User DEFAULT_TEST_USER = new User();
 
     @Inject
     private QuestionService questionService;
+    @Inject
+    private UserAnswerService userAnswerService;
+    @Inject
+    private UserService userService;
 
     //TODO think about compare Questions
     private NavigableMap<Question,List<UserAnswer>> userAnswers = new TreeMap<Question, List<UserAnswer>>(new Comparator<Question>() {
         @Override
         public int compare(Question o1, Question o2) {
-            return o1.getNumber().compareTo(o2.getNumber());
+            return Integer.compare(o1.getId(),o2.getId());
         }
     });
     private Map.Entry<Question,List<UserAnswer>> currentEntry;
@@ -44,14 +50,17 @@ public class QuestionUserMB implements Serializable {
 
     @PostConstruct
     public void init() {
-        //TODO change to real list
+        User user = userService.getUserByLogin("test login");
+        //TODO change to real list and user
         for (Question question : questionService.getAllQuestions()) {
             List<UserAnswer> list = new ArrayList<UserAnswer>();
             for (Answer answer : question.getAnswers()) {
                 UserAnswer userAnswer = new UserAnswer();
                 userAnswer.setQuestion(question);
                 userAnswer.setAnswer(answer);
-                userAnswer.setUser(DEFAULT_TEST_USER);
+                userAnswer.setTestingDate(new Date());
+                userAnswer.setUser(user);
+                userAnswer.setUserAnswerYesNo(false);
                 list.add(userAnswer);
             }
             userAnswers.put(question, list);
@@ -82,6 +91,18 @@ public class QuestionUserMB implements Serializable {
         }
     }
 
+    public String saveResult(){
+        userAnswerService.saveUserAnswers(userAnswers.values());
+        addMessage("Тестування завершено!", FacesMessage.SEVERITY_INFO);
+        return "/index.xhtml";
+    }
+
+    public void addMessage(String summary, FacesMessage.Severity messageType) {
+        FacesMessage message = new FacesMessage(messageType, summary,  null);
+        FacesContext.getCurrentInstance().addMessage(null, message);
+    }
+
+                    /*-------setters/getters---------*/
 
     public NavigableMap<Question, List<UserAnswer>> getUserAnswers() {
         return userAnswers;
@@ -98,4 +119,5 @@ public class QuestionUserMB implements Serializable {
     public void setCurrentEntry(Map.Entry<Question, List<UserAnswer>> currentEntry) {
         this.currentEntry = currentEntry;
     }
+
 }
