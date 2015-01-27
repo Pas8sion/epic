@@ -36,7 +36,7 @@ public class UserAnswer implements Serializable {
     private Boolean userAnswerYesNo;
 
     @Column(columnDefinition = "TEXT")
-    private Boolean userAnswerText;
+    private String userAnswerText;
 
 
 
@@ -92,11 +92,11 @@ public class UserAnswer implements Serializable {
         this.userAnswerYesNo = userAnswerYesNo;
     }
 
-    public Boolean getUserAnswerText() {
+    public String getUserAnswerText() {
         return userAnswerText;
     }
 
-    public void setUserAnswerText(Boolean userAnswerText) {
+    public void setUserAnswerText(String userAnswerText) {
         this.userAnswerText = userAnswerText;
     }
 
