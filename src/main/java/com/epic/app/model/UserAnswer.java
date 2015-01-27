@@ -28,7 +28,7 @@ public class UserAnswer implements Serializable {
     @JoinColumn(name = "question_id")
     private Question question;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "answers_id")
     private Answer answer;
 
